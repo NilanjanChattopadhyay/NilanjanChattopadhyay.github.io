@@ -3,7 +3,7 @@ author: Nilanjan
   name: Nilanjan Chattopadhyay
   email: 
 description: > # this means to ignore newlines until "show_excerpts:"
-  Definitive guide to the mysterious world of deep learning.
+  Notebook from Nilanjan's Laboratory. Definitive guide to the mysterious world of deep learning.
 
 show_excerpts: false # set to true to show excerpts on the homepage
 
