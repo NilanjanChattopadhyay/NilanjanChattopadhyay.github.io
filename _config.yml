@@ -17,7 +17,7 @@ minima:
   social_links:
 #     twitter: jekyllrb
     github:  NilanjanChattopadhyay
-    rss: rss
+    # rss: rss
     # devto: jekyll
     # dribbble: jekyll
     # facebook: jekyll
