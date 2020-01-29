@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Recurrent Neural Network from Scratch!"
+title: "Recurrent Neural Networks from Scratch!"
 categories: Basics
 ---
 
