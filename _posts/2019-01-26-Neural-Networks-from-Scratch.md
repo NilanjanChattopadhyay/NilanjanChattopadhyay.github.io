@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Neural Network from Scratch!"
+title: "Neural Networks from Scratch!"
 categories: Basics
 ---
 
