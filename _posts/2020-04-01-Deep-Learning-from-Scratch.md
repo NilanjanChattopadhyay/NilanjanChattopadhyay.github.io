@@ -35,7 +35,7 @@ The general form the this equation will become:
 
 ### **Activation Function**
 
-The non-linear function $f$ is called the activation function. The most commonly used activation functions are the rectified linear unit (ReLU), the sigmoid function and the hyperbolic tangent function.
+The non-linear function $$f$$ is called the activation function. The most commonly used activation functions are the rectified linear unit (ReLU), the sigmoid function and the hyperbolic tangent function.
 
 > **Rectified Linear Unit**
 \\[ ReLU(x) = max(0, x) \\]
@@ -151,7 +151,7 @@ Let the *Input* vector created above be $$x_1$$. A neural net with single neuron
 
 There is one additonal parameter we usually consider in a neuron - **bias**. Bias is added to the weighted sum of the inputs before going into the activation function. The modified equation will become -
 
-\\[ y = f(w_{1}x_{1} + b) $$ \\]
+\\[ y = f(w_{1}x_{1} + b) \\]
 
 Let's pick up random weight and bias for our *Input* data.
 
@@ -214,7 +214,7 @@ But this is very inefficient way of generating output vector. We can speed up th
 
 *Input* data can be considered as matrix with 10000 rows and 1 column. The weight *w1* is also a 1x1 matrix.
 
-Matrix multiplication of $$Input_{(10000,1)}*W1_{(1,1)}$$ will result in a matrix with 10,000 rows and 1 column. We will utilise the broadcasting abilities of Pytorch to add bias $B1$ to this. 
+Matrix multiplication of $$Input_{(10000,1)}*W1_{(1,1)}$$ will result in a matrix with 10,000 rows and 1 column. We will utilise the broadcasting abilities of Pytorch to add bias $$B1$$ to this. 
 
 We can use $$@$$ operator from Pytorch for matrix multiplication.
 
@@ -380,7 +380,7 @@ X1.clamp(0)
 
 
 
-***.clamp*** has replaced all the $-ve$ elements of the tensor with $$0$$. Let's calculate the *Output* again using the same *Input* and weights with ReLU activation.
+***.clamp*** has replaced all the $$-ve$$ elements of the tensor with $$0$$. Let's calculate the *Output* again using the same *Input* and weights with ReLU activation.
 
 
 ```python
