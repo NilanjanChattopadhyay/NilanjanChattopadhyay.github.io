@@ -406,7 +406,7 @@ plt.scatter(Input.numpy(), Output.squeeze().numpy())
 
 
 
-![png](output_40_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_40_1.png)
 
 
 Up untill now, we were only looking at the shapes of random predictions. Let's see if the neural network can approximate the relationship between *Input* and *Output*.
@@ -433,7 +433,7 @@ plt.scatter(Input.numpy(), Target.numpy())
 
 
 
-![png](output_42_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_42_1.png)
 
 
 The goal is to see how well a simple neural network can learn and approximate this non-linear relationship.
@@ -485,7 +485,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 
 
-![png](output_47_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_47_1.png)
 
 
 With random parameters(weights and biases), as visible in the graph, the predictions are very different from actual targets.
@@ -596,7 +596,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 
 
-![png](output_54_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_54_1.png)
 
 
 Though the loss decreased, we can see from the plot that the predictions are still pretty bad. 
@@ -676,7 +676,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 
 
-![png](output_57_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_57_1.png)
 
 
 The loss keeps on decreasing with every loop (*epoch*). From the plot, we see that the predictions are starting to take the shape of the output.
@@ -756,7 +756,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 
 
-![png](output_62_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_62_1.png)
 
 
 This shows that no matter how many layers are used, without non-linear activations, neural nets cannot learn non-linear relationships.
@@ -837,7 +837,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 
 
-![png](output_67_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_67_1.png)
 
 
 But we are losing some flexibility with torch.nn.Sequential. We might need to build models that are more complex than a sequence of linear layers (we will learn about them in later posts). But we also don't want to manually define every part of the model. By subclassing nn.Module and defining a forward we can have the flexibility of creating complex architectures with all the functionalities of torch.nn.Sequential.
@@ -909,7 +909,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 
 
-![png](output_70_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_70_1.png)
 
 
 ## **torch.optim Module**
@@ -987,7 +987,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 
 
-![png](output_73_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_73_1.png)
 
 
 ## **Mini-Batch**
@@ -1081,7 +1081,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 
 
-![png](output_76_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_76_1.png)
 
 
 ### **Dataset Class**
@@ -1175,7 +1175,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 
 
-![png](output_80_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_80_1.png)
 
 
 ### **DataLoader**
@@ -1265,7 +1265,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 
 
-![png](output_84_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_84_1.png)
 
 
 ## **Adding validation dataset to our pipeline**
@@ -1382,7 +1382,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 
 
-![png](output_88_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_88_1.png)
 
 
 
@@ -1403,7 +1403,7 @@ plt.scatter(Validation_Input.numpy(), Validation_Predicted.detach().numpy())
 
 
 
-![png](output_89_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_89_1.png)
 
 
 Our simple neural network is approximating the non-linear relationship between *Input* and *Target* quite well. Using validation data, we can also confirm that our model is generalizing well and not overfitting.
@@ -1440,7 +1440,7 @@ plt.scatter(Input[:, 0].numpy(), Input[:, 1].numpy(), c=Target.numpy())
 
 
 
-![png](output_94_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_94_1.png)
 
 
 
@@ -1566,7 +1566,7 @@ plt.scatter(Input[:10000, 0].numpy(), Input[:10000, 1].numpy(), c=Predicted.argm
 
 
 
-![png](output_99_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_99_1.png)
 
 
 
@@ -1583,7 +1583,7 @@ plt.scatter(Input[10000:, 0].numpy(), Input[10000:, 1].numpy(), c=Predicted.argm
 
 
 
-![png](output_100_1.png)
+![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_100_1.png)
 
 
 The predictions are visibly near identical to the actual target. We also observe that the accuracy is greater than 98% for both Train and *Validation*. It shows how powerful neural networks can be.
