@@ -28,7 +28,7 @@ A neuron receives one or more inputs, adds them up and passes the sum through a 
 <br>  Let's look at the above diagram - Neural Network with 1 neuron. This network receives 3 inputs from the Input Layer. Each input is then multiplied with a weight, $$w_{i}$$,  before going into the next layer. The weights are represented by arrows and are also called parameters. This network has only 1 Layer with 1 Unit. This unit adds up the 3 weighted inputs it received. Then it passes the sum through a non-linear function, $$f$$, and outputs a number. The output is represented by $$y$$ in this diagram. 
 
 This network can be mathematically represented as:
-$$$ y = f(w_{1}x_{1} + w_{2}x_{2} + w_{3}x_{3}) $$$
+\\[ y = f(w_{1}x_{1} + w_{2}x_{2} + w_{3}x_{3}) \\]
 
 The general form the this equation will become:
 \\[ y = f\biggl(\sum_{i=1}^{n}w_{i}x_{i}\biggr) \\]
@@ -38,13 +38,13 @@ The general form the this equation will become:
 The non-linear function $f$ is called the activation function. The most commonly used activation functions are the rectified linear unit (ReLU), the sigmoid function and the hyperbolic tangent function.
 
 > **Rectified Linear Unit**
-$$ ReLU(x) = max(0, x) $$
+\\[ ReLU(x) = max(0, x) \\]
 
 > **Sigmoid Function**
-$$ \sigma(x) = \frac{1}{1 + e^{-x}}$$
+\\[ \sigma(x) = \frac{1}{1 + e^{-x}} \\]
 
 > **Hyperbolic Tangent Function**
-$$ tanh(x) = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}}$$
+\\[ tanh(x) = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}} \\]
 
 These three fucntions are the most popular activations used in Neural Networks, but any function can be used as an activation function. There are some desirable properties we generally want in an activation -
 
@@ -79,7 +79,7 @@ NumPy is the fundamental package for scientific computing with Python and provid
 
 We will first create a neural network using nothing but PyTorch Tensors.
 
-A PyTorch Tensor is conceptually identical to an n-dimensional Numpy array. When $n=1$, the array is called a vector. For $n=2$, the 2D array is a matrix. What would be a matrix of matrices? A 3-dimensional tensor. 
+A PyTorch Tensor is conceptually identical to an n-dimensional Numpy array. When $$n=1$$, the array is called a vector. For $$n=2$$, the 2D array is a matrix. What would be a matrix of matrices? A 3-dimensional tensor. 
 
 Let's start by importing libraries.
 
@@ -145,13 +145,13 @@ Input.shape
 
 
 
-Let the *Input* vector created above be $x_1$. A neural net with single neuron for this input data will be:
+Let the *Input* vector created above be $$x_1$$. A neural net with single neuron for this input data will be:
 
-$$ y = f(w_{1}x_{1}) $$
+\\[ y = f(w_{1}x_{1}) \\]
 
 There is one additonal parameter we usually consider in a neuron - **bias**. Bias is added to the weighted sum of the inputs before going into the activation function. The modified equation will become -
 
-$$ y = f(w_{1}x_{1} + b) $$
+\\[ y = f(w_{1}x_{1} + b) $$ \\]
 
 Let's pick up random weight and bias for our *Input* data.
 
@@ -170,8 +170,8 @@ W1, B1
 
 
 
-Let's consider the case where our activation function is ***Identity Function***, i.e. $f(x)=x$. Then our model becomes:
-$$ y = w_{1}x_{1} + b $$
+Let's consider the case where our activation function is ***Identity Function***, i.e. $$f(x)=x$$. Then our model becomes:
+\\[ y = w_{1}x_{1} + b \\]
 
 This is identitical to linear regression.
 
@@ -214,9 +214,9 @@ But this is very inefficient way of generating output vector. We can speed up th
 
 *Input* data can be considered as matrix with 10000 rows and 1 column. The weight *w1* is also a 1x1 matrix.
 
-Matrix multiplication of $Input_{(10000,1)}*W1_{(1,1)}$ will result in a matrix with 10,000 rows and 1 column. We will utilise the broadcasting abilities of Pytorch to add bias $B1$ to this. 
+Matrix multiplication of $$Input_{(10000,1)}*W1_{(1,1)}$$ will result in a matrix with 10,000 rows and 1 column. We will utilise the broadcasting abilities of Pytorch to add bias $B1$ to this. 
 
-We can use $@$ operator from Pytorch for matrix multiplication.
+We can use $$@$$ operator from Pytorch for matrix multiplication.
 
 
 ```python
@@ -267,7 +267,7 @@ Input
 
 
 
-We have an *Input* vector with 10,000 elements randomly picked from $U[-1, 1)$. We define *W1* of the size $[1, 100]$. The 100 represents the number of hidden units and 1 represents the dimension of input elements. Every hidden unit will have its own bias. Thus, bias *B1* is a vector of size $100$.
+We have an *Input* vector with 10,000 elements randomly picked from $$U[-1, 1)$$. We define *W1* of the size $$[1, 100]$$. The 100 represents the number of hidden units and 1 represents the dimension of input elements. Every hidden unit will have its own bias. Thus, bias *B1* is a vector of size $$100$$.
 
 
 ```python
@@ -292,9 +292,9 @@ X1.shape
 
 
 
-Each element of the input was mutiplied with a weight and bias was added to it independently for all the hidden units. Thus, 100 outputs from every element. Hence, the size of *X1* is $[10000, 100]$. We didn't use any activation function.
+Each element of the input was mutiplied with a weight and bias was added to it independently for all the hidden units. Thus, 100 outputs from every element. Hence, the size of *X1* is $$[10000, 100]$$. We didn't use any activation function.
 
-Let's define the weights of the output layer. Now every element has 100 dimensions and we need 1 output for each element for our regression. So, our net will have 1 unit in the output layer. Therefore, the weight matrix for the output layer will be of the size $[100, 1]$. Since there is 1 unit, bias *B2* is a vector of size 1.
+Let's define the weights of the output layer. Now every element has 100 dimensions and we need 1 output for each element for our regression. So, our net will have 1 unit in the output layer. Therefore, the weight matrix for the output layer will be of the size $$[100, 1]$$. Since there is 1 unit, bias *B2* is a vector of size 1.
 
 
 ```python
@@ -338,9 +338,9 @@ Will we get a linear relationship between Input and Output if a non-linear activ
 Let's implement ReLU as an activation function for the same input and same parameters(weights and biases are also called parameters).
 
 The formula for ReLU is:
-$$ ReLU(x) = max(0, x) $$
+\\[ ReLU(x) = max(0, x) \\]
 
-This means if the output of the hidden layer is $-ve$, it will be replaced by $0$. *X1* contains the output of the hidden layers. It has 10,000 rows each for every element from *Input* and 100 columns where each column contains the output of a hidden unit.
+This means if the output of the hidden layer is $$-ve$$, it will be replaced by $$0$$. *X1* contains the output of the hidden layers. It has 10,000 rows each for every element from *Input* and 100 columns where each column contains the output of a hidden unit.
 
 
 ```python
@@ -380,7 +380,7 @@ X1.clamp(0)
 
 
 
-***.clamp*** has replaced all the $-ve$ elements of the tensor with $0$. Let's calculate the *Output* again using the same *Input* and weights with ReLU activation.
+***.clamp*** has replaced all the $-ve$ elements of the tensor with $$0$$. Let's calculate the *Output* again using the same *Input* and weights with ReLU activation.
 
 
 ```python
@@ -409,9 +409,9 @@ plt.scatter(Input.numpy(), Output.squeeze().numpy())
 
 Up untill now, we were only looking at the shapes of random predictions. Let's see if the neural network can approximate the relationship between *Input* and *Output*.
 
-We will create an *Input* vector with 10,000 elements randomly picked from $U[-1, 1)$. We will create a *Target* vector from the input using the following relation:
+We will create an *Input* vector with 10,000 elements randomly picked from $$U[-1, 1)$$. We will create a *Target* vector from the input using the following relation:
 
-$$ Target = f(Input) = Input^{2}$$
+\\[ Target = f(Input) = Input^{2} \\]
 
 Let's also plot the graph to visually confirm that the relation is non-linear.
 
@@ -494,20 +494,20 @@ Till now we have seen how to define a neural network with 1 hidden layer. The pa
 
 For the model to learn, it first needs to evaluate the how good or bad its performance is. For regression problems, *Mean Squared Error* is most commonly used as the *Loss Fuction* to evaluate the performance of the model. Many other functions can be used as a *Loss Function*.
 
-$$ MSE(Target, Prediction) = \frac{1}{n_{rows}} \sum_{i=1}^{n_{rows}} (Target_{i}-Prediction_{i})^{2}$$
+\\[ MSE(Target, Prediction) = \frac{1}{n_{rows}} \sum_{i=1}^{n_{rows}} (Target_{i}-Prediction_{i})^{2} \\]
 
 
 With random parameters, the loss will be pretty bad at the beginning. The goal of the training process is to optimize the loss function. Since our loss function is MSE, we want to minimize it as much as possible. 
 
 The MSE is a function of *Target* and *Predictions*. Predictions are a function of *Input* and *parameters* (weights and biases). So, we can change/update the parameters (weights and biases) of the network to reduce loss.
 
-$$ Loss = f(Input, Target, parameters)$$
+\\[ Loss = f(Input, Target, parameters) \\]
 
 To minimize our loss, we will use an algorithm called *Gradient Descent*. Gradient Descent is an iterative algorithm, that starts with random parameters on a loss function and travels down its slope in steps until it reaches the lowest point of the function. With each step we update the parameters reducing loss.
 
-The slope of a function is its gradients. The step size is $gradient$ * $learning$ $rate$. We update the parameters by going down the slope:
+The slope of a function is its gradients. The step size is $$gradient$$ * $$learning$$ $$rate$$. We update the parameters by going down the slope:
 
-$$ new\_parameters = old\_prameters - learning\_rate*gradient$$
+\\[ new\_parameters = old\_prameters - learning\_rate*gradient \\]
 
 
 
@@ -914,7 +914,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 Till now were manually implementing Gradient Descent for updating the parameters and reduce loss. Pytorch has a built-in package to do it for us - ***torch.optim***. 
 
-Also, ***torch.optim** contains more advanced and faster optimization algorithms, like Adam, that can be hard to implement manually.
+Also, ***torch.optim*** contains more advanced and faster optimization algorithms, like Adam, that can be hard to implement manually.
 
 
 ```python
