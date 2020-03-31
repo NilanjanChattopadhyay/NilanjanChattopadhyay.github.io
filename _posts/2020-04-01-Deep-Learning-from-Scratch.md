@@ -332,7 +332,7 @@ plt.scatter(Input.numpy(), Output.squeeze().numpy())
 
 
 
-![png](output_32_1.png)
+![png](NilanjanChattopadhyay.github.io/images/2019-04-01-Deep-Learning-from-Scratch/output_32_1.png)
 
 
 Will we get a linear relationship between Input and Output if a non-linear activation fuction is used? Or would our output be similar to the shape of the activation function?
