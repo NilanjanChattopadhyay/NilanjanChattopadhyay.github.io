@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Deep Learning From Scratch"
+categories: Basics
+---
+
 Goal of this tutorial:
 
 *   Introduce Neural Networks
