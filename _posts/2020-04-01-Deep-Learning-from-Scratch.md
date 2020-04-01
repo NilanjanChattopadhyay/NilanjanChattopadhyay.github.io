@@ -7,7 +7,7 @@ categories: Basics
 Goal of this tutorial:
 
 *   Introduce Neural Networks
-*   Introduce Pytorch
+*   Introduce PyTorch
 *   Build a neural network from scratch
 
 Prerequisites:
@@ -36,7 +36,7 @@ A neuron receives one or more inputs, adds them up and passes the sum through a 
 This network can be mathematically represented as:
 \\[ y = f(w_{1}x_{1} + w_{2}x_{2} + w_{3}x_{3}) \\]
 
-The general form the this equation will become:
+The generalized form of the above equation would be:
 \\[ y = f\biggl(\sum_{i=1}^{n}w_{i}x_{i}\biggr) \\]
 
 ### **Activation Function**
@@ -52,7 +52,7 @@ The non-linear function $$f$$ is called the activation function. The most common
 > **Hyperbolic Tangent Function**
 \\[ tanh(x) = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}} \\]
 
-These three fucntions are the most popular activations used in Neural Networks, but any function can be used as an activation function. There are some desirable properties we generally want in an activation -
+These three functions are the most popular activations used in Neural Networks, but any function can be used as an activation function. There are some desirable properties we generally want in an activation -
 
 *   Non-Linear functions
 *   Differentiable functions
@@ -65,7 +65,7 @@ We will explore the benefits of these properties later.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Colored_neural_network.svg" width="296" height="356" title="Neural Network" align="center"/>
 
-In practice we will almost always use neural networks with more than 1 unit. The above image is an example of a neural net with a 1 hidden layer. Each hidden unit receives 3 inputs modified by a weight. The weights are different for each unit and thus, there are 12 weights/parameters/arrows between the input layer and hidden layer. Each hidden unit sums the weighted inputs and passes the sum through an activation function to produce an output. The output of the hidden layer becomes input for the next layer.
+In practice we will almost always use neural networks with more than 1 unit. The above image is an example of a neural net with 1 hidden layer. Each hidden unit receives 3 inputs modified by a weight. The weights are different for each unit and thus, there are 12 weights/parameters/arrows between the input layer and hidden layer. Each hidden unit sums the weighted inputs and passes the sum through an activation function to produce an output. The output of the hidden layer becomes input for the next layer.
 
 ## **Pytorch**
 
@@ -77,7 +77,7 @@ Two core features of this library are:
 
 ### **Why can't we use Numpy for deep learning?**
 
-NumPy is the fundamental package for scientific computing with Python and provides a powerful N-dimensional array object. But operations like matrix multiplication performed using Pytorch Tensors can utilize GPUs and can be 50x faster than Numpy Arrays. Since matrix multiplication is fundamental to neural networks, using Pytorch we can create bigger networks and use bigger datasets. Another reason for using Pytorch is that it provides advanced functionalities like automatic differentiation (autograd) for operations on Tensors. Implementing neural networks involves differentiation which can get extremely complicated as the size of the network grows. Differentiation of parameters/weights of neural networks can be automated using Pytorch.
+Numpy is the fundamental package for scientific computing with Python and provides a powerful N-dimensional array object. But operations like matrix multiplication performed using Pytorch Tensors can utilize GPUs and can be 50x faster than Numpy Arrays. Since matrix multiplication is fundamental to neural networks, using Pytorch we can create bigger networks and use bigger datasets. Another reason for using Pytorch is that it provides advanced functionalities like automatic differentiation (autograd) for operations on Tensors. Implementing neural networks involves differentiation which can get extremely complicated as the size of the network grows. Differentiation of parameters/weights of neural networks can be automated using Pytorch.
 
 
 
@@ -108,13 +108,15 @@ import torch
 
 
 ```python
+# The parameters of neural networks are initialized at random
+# By setting a seed we should get the same initial weights every time
 torch.manual_seed(42)
 
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 ```
 
-Let's create a input data to experiment on. We will create a vector with 10,000 data points using pytorch's rand function.
+Let's create an input data to experiment on. We will create a vector with 10,000 data points using pytorch's rand function.
 
 ***torch.rand*** - returns a tensor filled with random numbers from a uniform distribution on the interval [0, 1)
 
@@ -179,7 +181,7 @@ W1, B1
 Let's consider the case where our activation function is ***Identity Function***, i.e. $$f(x)=x$$. Then our model becomes:
 \\[ y = w_{1}x_{1} + b \\]
 
-This is identitical to linear regression.
+This is identical to linear regression.
 
 Let's create the *Output* vector by mutiplying every data point with weight *W1* and adding bias *B1*.
 
@@ -248,7 +250,7 @@ We can use $$@$$ operator from Pytorch for matrix multiplication.
 
 We can see that matrix multiplication is magnitudes faster compared to the *for loop*. Though the *for loop* is pretty fast, but to use bigger networks for bigger data sets with millions of dimensions, the time difference between *for loop* and *matrix multiplication* will be significant.
 
-Let's look at why we need non-linear activations for neural networks. Matrix multiplications are linear transformations and no matter how many neurons we add or how much we increase the number of hidden layers, the output will always be a linear transformation of the input. Without any non-linearity neural networks, no matter how wide or deep, cannot learn non-linear relationships between Input and Output. In practice, the relationship will almost always be non-linear.
+Let's look at why we need non-linear activations for neural networks. Matrix multiplications are linear transformations and no matter how many neurons we add or how much we increase the number of hidden layers, the output will always be a linear transformation of the input. Without any non-linearity. neural networks, no matter how wide or deep, cannot learn non-linear relationships between Input and Output. In practice, the relationship will almost always be non-linear.
 
 Through activation functions we can introduce non-linearity. Neural Networks with atleast 1 hidden layer and non-linear activation function like ReLU are **universal approximators**. According to **Universal Approximation Theorem** these neural networks can approximate any continuous function.
 
@@ -413,7 +415,7 @@ plt.scatter(Input.numpy(), Output.squeeze().numpy())
 ![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_40_1.png)
 
 
-Up untill now, we were only looking at the shapes of random predictions. Let's see if the neural network can approximate the relationship between *Input* and *Output*.
+Up until now, we were only looking at the shapes of random predictions. Let's see if the neural network can approximate the relationship between *Input* and *Output*.
 
 We will create an *Input* vector with 10,000 elements randomly picked from $$U[-1, 1)$$. We will create a *Target* vector from the input using the following relation:
 
@@ -498,7 +500,7 @@ With random parameters(weights and biases), as visible in the graph, the predict
 
 Till now we have seen how to define a neural network with 1 hidden layer. The parameters are initialized at random. Thus, the ouput of our neural network is also random. The next step is to *train* the network and to make it learn the relationship between *input* and *target*.
 
-For the model to learn, it first needs to evaluate the how good or bad its performance is. For regression problems, *Mean Squared Error* is most commonly used as the *Loss Fuction* to evaluate the performance of the model. Many other functions can be used as a *Loss Function*.
+For the model to learn, it first needs to evaluate its performance. For regression problems, *Mean Squared Error* is most commonly used as the *Loss Fuction* to evaluate the performance of the model. Many other functions can be used as a *Loss Function*.
 
 \\[ MSE(Target, Prediction) = \frac{1}{n_{rows}} \sum_{i=1}^{n_{rows}} (Target_{i}-Prediction_{i})^{2} \\]
 
@@ -513,7 +515,7 @@ To minimize our loss, we will use an algorithm called *Gradient Descent*. Gradie
 
 The slope of a function is its gradients. The step size is $$gradient$$ * $$learning$$ $$rate$$. We update the parameters by going down the slope:
 
-\\[ new\_parameters = old\_prameters - learning\_rate*gradient \\]
+\\[ new\\_parameters = old\\_prameters - learning\\_rate*gradient \\]
 
 
 
@@ -549,9 +551,9 @@ learning_rate = 0.001
 # Compute gradient of the loss functions
 Loss.backward()
 
-# Pytorch will, by default, will calculate the gradients by considering every Tensor operation with requires_grad=True
+# Pytorch will, by default, calculate the gradients by considering every Tensor operation with requires_grad=True
 # But we don't want the weight update step to be used for gradient calculation
-# We do this be wrapping the update part in torch.no_grad()
+# We do this by wrapping the update part in torch.no_grad()
 with torch.no_grad():
   
   W1 -= learning_rate * W1.grad
@@ -771,7 +773,7 @@ Let's start taking advantage of PyTorch’s built-in functionalities and modules
 
 ## **torch.nn Module**
 
-Even with automatic differentiation, designing and training a large neural networks will be very messy if we start from the scratch. In PyTorch, the nn classes provides high-level abstractions that can be used to avoid this problem. We will use it to shorten our code and make it more understandable.
+Even with automatic differentiation, designing and training a large neural network can be very messy if we start from the scratch. In PyTorch, the nn classes provide high-level abstractions that can be used to avoid this problem. We will use it to shorten our code and make it more understandable.
 
 Using **torch.nn** we won't need to:
 
@@ -782,10 +784,10 @@ Using **torch.nn** we won't need to:
 
 
 ```python
-# torch.nn.Sequential is used to define Neural Networls as a sequence of layers
+# torch.nn.Sequential is used to define Neural Networks as a sequence of layers
 # Linear Module computes output from input using matrix multiplication
 # It automatically sets requires_grad = True
-# torch.nn.Linear requires 3 arguments - size of each input sample, size of each output sample, and if want an additive bias
+# torch.nn.Linear requires 3 arguments - size of each input sample, size of each output sample, and if we want an additive bias
 Model = torch.nn.Sequential(torch.nn.Linear(1, 100, bias=True), torch.nn.ReLU(), torch.nn.Linear(100, 1, bias=True))
 
 # torch.nn has lots of commonly used loss functions like Mean Squared Error (MSE)
@@ -844,7 +846,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 ![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_67_1.png)
 
 
-But we are losing some flexibility with torch.nn.Sequential. We might need to build models that are more complex than a sequence of linear layers (we will learn about them in later posts). But we also don't want to manually define every part of the model. By subclassing nn.Module and defining a forward we can have the flexibility of creating complex architectures with all the functionalities of torch.nn.Sequential.
+But we are losing some flexibility with torch.nn.Sequential. We might need to build models that are more complex than a sequence of linear layers (we will learn about them in later posts). But we also don't want to manually define every part of the model. By subclassing nn.Module and defining a *forward* function we can have the flexibility of creating complex architectures with all the functionalities of torch.nn.Sequential.
 
 
 ```python
@@ -918,7 +920,7 @@ plt.scatter(Input.numpy(), Predicted.detach().numpy())
 
 ## **torch.optim Module**
 
-Till now were manually implementing Gradient Descent for updating the parameters and reduce loss. Pytorch has a built-in package to do it for us - ***torch.optim***. 
+Till now we were manually implementing Gradient Descent for updating the parameters and reduce loss. Pytorch has a built-in package to do it for us - ***torch.optim***. 
 
 Also, ***torch.optim*** contains more advanced and faster optimization algorithms, like Adam, that can be hard to implement manually.
 
@@ -1428,7 +1430,7 @@ Target[Input[:,0].pow(2) + Input[:,1].pow(2) >= 1] = 1
 Target[Input[:,0].pow(2) + Input[:,1].pow(2) < 0.25] = 2
 ```
 
-We want our neural network to correctly identify in which region a coordinates will lie in.
+We want our neural network to correctly identify the region for a given pair of coordinates.
 
 
 ```python
@@ -1464,7 +1466,7 @@ The objective is to create a Neural Network that can identify the region of the 
 
 We can create a neural network in the same way using ***torch.nn.Module***. We will use gradient descent, exactly in the same way as implemented for regression, to update our weights.
 
-The only change is we will be use a different loss function as *MSE* can't be used for classification problems.
+The only change is we will be using a different loss function as *MSE* can't be used for classification problems.
 
 
 ```python
@@ -1590,11 +1592,11 @@ plt.scatter(Input[10000:, 0].numpy(), Input[10000:, 1].numpy(), c=Predicted.argm
 ![png](/images/2019-04-01-Deep-Learning-from-Scratch/output_100_1.png)
 
 
-The predictions are visibly near identical to the actual target. We also observe that the accuracy is greater than 98% for both Train and *Validation*. It shows how powerful neural networks can be.
+The predictions are visibly near identical to the actual target. We also observe that the accuracy is greater than 98% for both *Train* and *Validation*. It shows how powerful neural networks can be.
 
 # Summary
 
-We now should have a good understanding of how neural network basics, how they work, what are model parameters and why activations functions are important. 
+We now should have a good understanding of the basic components of a neural network, its inner workings, what are model parameters and why activations functions are important. 
 
 On the practical front, we can now create a neural network from scratch using Pytorch, calculate loss, implement gradient descent to update weights, measure performance on a seperate validation dataset and use pre-built Pytorch functionalities like torch.nn, torch.optim or DataLoaders.
 
