@@ -250,7 +250,7 @@ We can use $$@$$ operator from Pytorch for matrix multiplication.
 
 We can see that matrix multiplication is magnitudes faster compared to the *for loop*. Though the *for loop* is pretty fast, but to use bigger networks for bigger data sets with millions of dimensions, the time difference between *for loop* and *matrix multiplication* will be significant.
 
-Let's look at why we need non-linear activations for neural networks. Matrix multiplications are linear transformations and no matter how many neurons we add or how much we increase the number of hidden layers, the output will always be a linear transformation of the input. Without any non-linearity. neural networks, no matter how wide or deep, cannot learn non-linear relationships between Input and Output. In practice, the relationship will almost always be non-linear.
+Let's look at why we need non-linear activations for neural networks. Matrix multiplications are linear transformations and no matter how many neurons we add or how much we increase the number of hidden layers, the output will always be a linear transformation of the input. Without any non-linearity, neural networks, no matter how wide or deep, cannot learn non-linear relationships between Input and Output. In practice, the relationship will almost always be non-linear.
 
 Through activation functions we can introduce non-linearity. Neural Networks with atleast 1 hidden layer and non-linear activation function like ReLU are **universal approximators**. According to **Universal Approximation Theorem** these neural networks can approximate any continuous function.
 
