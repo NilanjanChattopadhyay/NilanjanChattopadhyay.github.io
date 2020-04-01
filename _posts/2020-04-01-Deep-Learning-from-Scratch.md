@@ -529,7 +529,7 @@ The slope of a function is its gradients. The step size is $$gradient$$ * $$lear
 
 We don't need to worry about the mathematics that goes into gradient calculation. Calulating gradients in a neural network can be a daunting task. Fortunately, Pytorch can automatically calculate gradients of the parameters.
 
-If you wish to explore the mathematics of gradient calculation for neural networks, you can find details [here](https://explained.ai/matrix-calculus/index.html).
+If you wish to explore the mathematics of gradient calculation for neural networks, you should read this amazing [tutorial](https://explained.ai/matrix-calculus/index.html).
 
 Setting **requires_grad=True** indicates that we want Pytorch to automatically compute gradients of the Tensors.
 
@@ -1596,7 +1596,7 @@ The predictions are visibly near identical to the actual target. We also observe
 
 # Summary
 
-We now should have a good understanding of the basic components of a neural network, its inner workings, what are model parameters and why activations functions are important. 
+We now should have a good understanding of the basic components of a neural network, its inner workings, what are model parameters and the importance of non-linear activations. 
 
 On the practical front, we can now create a neural network from scratch using Pytorch, calculate loss, implement gradient descent to update weights, measure performance on a seperate validation dataset and use pre-built Pytorch functionalities like torch.nn, torch.optim or DataLoaders.
 
