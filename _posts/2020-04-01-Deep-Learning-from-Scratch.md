@@ -515,7 +515,7 @@ To minimize our loss, we will use an algorithm called *Gradient Descent*. Gradie
 
 The slope of a function is its gradients. The step size is $$gradient$$ * $$learning$$ $$rate$$. We update the parameters by going down the slope:
 
-\\[ new\\_parameters = old\\_prameters - learning\\_rate*gradient \\]
+\\[ new\\_parameters = old\\_parameters - learning\\_rate*gradient \\]
 
 
 
