@@ -6,7 +6,7 @@ categories: Basics
 
 Goal of this tutorial:
 
-*   Introduce Neural Networks
+*   Introduce the idea of Neural Networks
 *   Introduce PyTorch
 *   Build a neural network from scratch
 
@@ -27,11 +27,11 @@ A neuron receives one or more inputs, adds them up and passes the sum through a 
 
 
 
-### **Neuron**
+### **Neural Network with 1 Layer - A Neuron**
 
 <img src="https://github.com/NilanjanChattopadhyay/NilanjanChattopadhyay.github.io/blob/master/images/NeuralNet-1.png?raw=true" width="557" height="400" alt="Neural Network with 1 Neuron" title="Neural Network" align="center"/>
 
-<br>  Let's look at the above diagram - Neural Network with 1 neuron. This network receives 3 inputs from the Input Layer. Each input is then multiplied with a weight, $$w_{i}$$,  before going into the next layer. The weights are represented by arrows and are also called parameters. This network has only 1 Layer with 1 Unit. This unit adds up the 3 weighted inputs it received. Then it passes the sum through a non-linear function, $$f$$, and outputs a number. The output is represented by $$y$$ in this diagram. 
+<br>  Let's look at the above diagram - Neural Network with 1 layer. This network receives 3 inputs from the Input Layer. Each input is then multiplied with a weight, $$w_{i}$$,  before going into the next layer. The weights are represented by arrows and are also called parameters. This network has only 1 Layer with 1 Neuron. First, the neuron adds up the 3 weighted inputs it received. Then it passes the sum through a non-linear function, $$f$$, and outputs a number. The output is represented by $$y$$ in this diagram. 
 
 This network can be mathematically represented as:
 \\[ y = f(w_{1}x_{1} + w_{2}x_{2} + w_{3}x_{3}) \\]
@@ -368,7 +368,7 @@ X1
 
 
 
-Pytorch has a built-in function for ReLU. Please check Pytorch's documentation for more details.
+Pytorch has a built-in function for ReLU. Please check [Pytorch's documentation](https://pytorch.org/docs/stable/torch.html#) for more details.
 
 
 ```python
