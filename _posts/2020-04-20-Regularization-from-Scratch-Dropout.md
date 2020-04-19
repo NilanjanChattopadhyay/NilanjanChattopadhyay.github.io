@@ -489,7 +489,7 @@ Note that since the geometric mean of multiple predictions might not be a probab
 \\[ p_{ensemble} = \sum_{\mu}^{}p(\mu)p(y|x, \mu) \\]
 
 > **Geometric Mean**
-\\[ p_{ensemble} = \bigg(\prod_{\mu}^{}p(\mu)p(y|x, \mu)\bigg)^{\frac{1}{2^{d}}} \\]
+\\[ p_{ensemble} = \bigg(\prod_{\mu}^{}p(y|x, \mu)\bigg)^{\frac{1}{2^{d}}} \\]
 
 <br> $$where$$
 <br> $$\mu$$ represents the mask vector
