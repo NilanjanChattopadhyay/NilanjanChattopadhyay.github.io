@@ -14,7 +14,7 @@ Prerequisites:
 
 Neural networks containing multiple non-linear hidden layers are universal approximators capable of learning very complicated relationships between inputs and outputs. This makes them extremely flexible and very powerful machine learning systems as we saw on the last [post](https://nilanjanchattopadhyay.github.io/basics/2020/04/01/Deep-Learning-from-Scratch.html). But this flexibility can lead to overfitting, a common problem in neural networks. Large deep learning models often perform far better on training data than on validation data. 
 
-Let's try to see that in practice. We will start by creating a synthetic data [like we did previously](https://nilanjanchattopadhyay.github.io/basics/2020/04/01/Deep-Learning-from-Scratch.html).
+Let's try to see that in practice. We will start by creating synthetic data [as we did previously](https://nilanjanchattopadhyay.github.io/basics/2020/04/01/Deep-Learning-from-Scratch.html).
 
 
 ```python
@@ -42,7 +42,7 @@ torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 ```
 
-Here we are creating a *Input* data with 100 dimensions and 10,000 data points randomly generated from $$ U(-1, 1] $$. Let's denote the dimensions of the *Input* vectors as $$ x_{0}, x_{1}, \dots x_{99} $$.
+Here we are creating an *Input* data with 100 dimensions and 10,000 data points randomly generated from $$ U(-1, 1] $$. Let's denote the dimensions of the *Input* vectors as $$ x_{0}, x_{1}, \dots x_{99} $$.
 
 
 ```python
@@ -56,7 +56,7 @@ We will create a *Target* vector from the input using the following relation:
 \\[ Target = f(x_{0}, x_{1}, \dots x_{99}) = x_{0}^{0} - x_{1} + x_{2}^{2} - x_{3} \dots  x_{46}^{46} - x_{47} + x_{48}^{48} - x_{49} + \epsilon \\]
 \\[ \text{where } \epsilon \text{ is random noise} \\]
 
-There is no reason for choosing this particular relation between *Input* and *Target*. We are trying to create a high-dimensional regression problem with non-linear relationship between the *Input* and *Target* vectors. Though the *Input* has 100 dimensions/variables, note that the relation is dependent on only 50 variables. In practice we will always have extra variables and noise in our data.
+There is no reason for choosing this particular relation between *Input* and *Target*. We are trying to create a high-dimensional regression problem with non-linear relationship between the *Input* and *Target* vectors. Though the *Input* has 100 dimensions/variables, note that the relationship is dependent on only 50 variables. In practice, we will always have extra variables and noise in our data.
 
 
 
@@ -198,15 +198,15 @@ Training(Model, Train_DataLoader, Validation_DataLoader, learning_rate = 0.01, e
 Let's breakdown the output into 2 key points -
 
 1.   Our network was able to identify the non-linear high dimensional relationship between *Input* and *Output* for training data with *MSE* ~ 0.07.
-2.   The *MSE* for validation dataset initially decreased to ~ 0.98 and then started to increase as we continued training never decreasing again.
+2.   The *MSE* for the validation dataset initially decreased to ~ 0.98 and then started to increase as we continued training never decreasing again.
 
 This is a clear case of overfitting.
 
-Our network overfitted on a data where the validation data is coming from the exact same distribution. One reason for overfitting could be that our model learnt relations that were not present using the variables that were not part of the relationship: $$ x_{50}, x_{51}, \dots x_{99} $$. Another reason could be that our model tried to learn the random noise present in our data.
+Our network overfitted on a data where the validation data is coming from the exact same distribution. One reason for overfitting could be that our model learned relations that were not present using the variables that were not part of the relationship: $$ x_{50}, x_{51}, \dots x_{99} $$. Another reason could be that our model tried to learn the random noise present in our data.
 
 ## Experiment 2 - High Dimensional Data without Extra Variables or Random Noise
 
-What if the we didn't have any noise in the data? And no extra variables? In practice this will be nearly impossible to achieve. But for the sake of experimentation let's do that anyway.
+What if we didn't have any noise in the data? And no extra variables? In practice, this will be nearly impossible to achieve. But for the sake of experimentation let's do that anyway.
 
 Let's recreate the target variable using the following:
 
@@ -269,27 +269,27 @@ Again let's breakdown the results into 2 key points -
 *   Our network was able to identify the non-linear high dimensional relationship between Input and Output for training data with MSE ~ 0.06
 *   The MSE for validation dataset initially decreased to ~ 0.93 and then started to increase as we continued training
 
-Even in the absence of any statistical noise our model can overfit. As the dimension of the input increases, the flexibility of our model increases. Higher dimension size means more parameters which makes the model's function selection range is wider making it more prone to overfitting as there will be many different functions that can model the training set almost perfectly. 
+Even in the absence of any statistical noise, our model can overfit. As the dimension of the input increases, the flexibility of our model increases. Higher dimension size means more parameters that make the model's function selection range is wider making it more prone to overfitting as there will be many different functions that can model the training set almost perfectly. 
 
 
 There are various ways to address this problem of overfitting. We can reduce the input dimension or increase training data or use weight penalties of various
-kinds such as $$L1$$ and $$L2$$ regularization. In this post we will be looking at one of the key techniques for reducing overfitting in neural networks - **Dropout**.
+kinds such as $$L1$$ and $$L2$$ regularization. In this post, we will be looking at one of the key techniques for reducing overfitting in neural networks - **Dropout**.
 
 # **Dropout**
 
 In 2014 by Srivastava et al. published a paper titled [Dropout: A Simple Way to Prevent Neural Networks from
 Overfitting](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf) revolutionizing the field of deep learning. In their [paper](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf), they introduced the idea of randomly dropping units from the neural network during training. They explained that dropout prevents overfitting and provides a way of combining different neural network architectures efficiently. 
 
-Ensembling multiple models is good way to reduce overfitting and nearly always improves the performance. So, we can train large number of neural networks and average their predictions to get better results. However, this can be very challenging with bigger networks. Training a large is computationally expensive and training multiple models might not be feasible. Ensembling is generally more helpful when the models are not correlated i.e, they should be different from each other. To achieve that the neural networks would need to be of different architectures and trained on different data. This also can be very challenging as we will need to tune every architecture seperately. Also, there may not be enough data available to train different networks on
+Ensembling multiple models is a good way to reduce overfitting and nearly always improves performance. So, we can train a large number of neural networks and average their predictions to get better results. However, this can be very challenging with bigger networks. Training a large is computationally expensive and training multiple models might not be feasible. Ensembling is generally more helpful when the models are not correlated i.e, they should be different from each other. To achieve that the neural networks would need to be of different architectures and trained on different data. This also can be very challenging as we will need to tune every architecture separately. Also, there may not be enough data available to train different networks on
 different subsets of the data.
 
 Dropout is a technique that provides a way of combining many different neural network architectures efficiently.
 
 ## Dropout during Training
 
-Dropout means randomly switching off some hidden units in a neural network while training. During a mini-batch units are randomly removed from the network, along with all its incoming and outgoing connections resulting in a thinned network. Each unit is retained with a fixed probability $$p$$ independent of other units. This means that the probability of a unit being dropped in a mini-batch will be $$1-p$$. 
+Dropout means randomly switching off some hidden units in a neural network while training. During a mini-batch, units are randomly removed from the network, along with all its incoming and outgoing connections resulting in a thinned network. Each unit is retained with a fixed probability $$p$$ independent of other units. This means that the probability of a unit being dropped in a mini-batch will be $$1-p$$. 
 
-Since neural networks are a series of aﬃne transformations and non-linearities, an unit can be dropped by multiplying its output value by zero. Thus, dropout can be implemented by multiplying outputs of activations by Bernoulli distributed random variables which take the value 1 with probability $$p$$ and 0 otherwise. $$p$$ is a hyperparameter ﬁxed before training.
+Since neural networks are a series of aﬃne transformations and non-linearities, a unit can be dropped by multiplying its output value by zero. Thus, dropout can be implemented by multiplying outputs of activations by Bernoulli distributed random variables which take the value 1 with probability $$p$$ and 0 otherwise. $$p$$ is a hyperparameter ﬁxed before training.
 
 Commonly $$p=0.5$$ is used for hidden units and $$p=0.8$$ for input units.
 
@@ -299,9 +299,9 @@ Let's look at an example of a neural network with 2 hidden layers *Fig. 1*.
 
 *Fig. 1: Neural Network with 2 input units and 5 hidden units in 2 hidden layers*
 
-Let's apply dropout to its hidden layers with $$p=0.6$$. $$p$$ is the 'keep probability'. This makes the probability of a hidden unit being dropped equal $$1-p=0.4$$. Thus with every forward pass 40% of units will be switched off randomly. This will vary with every mini-batch in every epoch: *Fig. 2* and *Fig. 3*. 
+Let's apply dropout to its hidden layers with $$p=0.6$$. $$p$$ is the 'keep probability'. This makes the probability of a hidden unit being dropped equal $$1-p=0.4$$. Thus with every forward pass, 40% of units will be switched off randomly. This will vary with every mini-batch in every epoch: *Fig. 2* and *Fig. 3*. 
 
-$$2^{n}$$ thinned neural networks can be generated from a neural network with $$n$$ units. So training a neural network with dropout can be seen as training a exponentially large number of neural networks from the collection of $$2^{n}$$ thinned networks where the weights are shared between them.
+$$2^{n}$$ thinned neural networks can be generated from a neural network with $$n$$ units. So training a neural network with dropout can be seen as training exponentially large number of neural networks from the collection of $$2^{n}$$ thinned networks where the weights are shared between them.
 
 *Fig. 2* and *Fig. 3* illustrates how this network might look like during forward propagation.
 
@@ -367,7 +367,7 @@ H2.clamp_(0)
 Out = H2@W3 + B3
 ```
 
-To apply dropout we will create a binary vector, commonly called as binary mask, where $$1$$'s will represent the units to keep and $$0$$'s will represnt the units to drop.
+To apply dropout we will create a binary vector, commonly called as binary mask, where $$1$$'s will represent the units to keep and $$0$$'s will represent the units to drop.
 
 
 ```python
@@ -420,7 +420,7 @@ H1
 
 
 
-To apply the dropout mask, we do an element wise product. We can look at the result and confirm that unit 2, unit 4 and unit 5 have been turned off.
+To apply the dropout mask, we do an element-wise product. We can look at the result and confirm that unit 2, unit 4 and unit 5 have been turned off.
 
 
 ```python
@@ -477,11 +477,11 @@ Out = H2@W3 + B3
 
 ## Inference
 
-One of the most common way to combine multiple models is to take arithmatic mean of the predictions from each model. But in dropout there can be exponentially many thinned models and it becomes unfeasible to store and average predictions from all the model. 
+One of the most common method of combining multiple models is to take arithmetic mean of the predictions from each model. But in dropout, there can be exponentially many thinned models and it becomes unfeasible to store and average predictions from all the model. 
 
-The predictions of the combined models can be approximated by averaging together the output from few thinned networks. 10–20 such subnetworks are often suﬃcient to obtain good performance. 
+The predictions of the combined models can be approximated by averaging together the output from a few thinned networks. 10–20 such subnetworks are often suﬃcient to obtain good performance. 
 
-Another good approximation can be achieved by taking geometric mean of the predictions. Arithmetic mean and geometric mean often performs comparably when ensembling. More details can be found in this [paper](https://arxiv.org/pdf/1312.6197.pdf).
+Another good approximation can be achieved by taking the geometric mean of the predictions. The arithmetic mean and geometric mean often performs comparably when ensembling. More details can be found in this [paper](https://arxiv.org/pdf/1312.6197.pdf).
 
 Note that since the geometric mean of multiple predictions might not be a probability distribution. Therefore, a condition is placed that none of the submodels can assign a probability of 0 to any event. Also, the resulting distribution is normalized.
 
@@ -497,7 +497,7 @@ Note that since the geometric mean of multiple predictions might not be a probab
 <br> $$p(y|x, \mu)$$ prediction of thinned network
 <br> $$d$$ is the number of units that may be dropped
 
-Inference for dropout is achived by approximating the geometric mean. If $$p$$ is the probability of a unit being retained during training, then the outgoing weights of that unit are multiplied by $$p$$ at test time. The idea is to keep the expected output value from the unit same during training and test time. This approximates the geometric mean of predictions  of the entire ensemble. Empirically training a network with dropout and using approximate averaging method at test time improves generalization and reduces overfitting and can work as well as Monte-Carlo Model Averaging.
+Inference for dropout is achieved by approximating the geometric mean. If $$p$$ is the probability of a unit being retained during training, then the outgoing weights of that unit are multiplied by $$p$$ at test time. The idea is to keep the expected output value from the unit same during training and test time. This approximates the geometric mean of predictions  of the entire ensemble. Empirically training a network with dropout and using this approximate averaging method at test time improves generalization and reduces overfitting and can work as well as Monte-Carlo Model Averaging.
 
 Let's implement the inference part of dropout along with the training part.
 
@@ -549,10 +549,10 @@ Out = H2@W3 + B3
 
 ## Inverted Dropout
 
-Till now we have applied dropout as per the [dropout paper](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf). However, most of the libaries, like PyTorch, implements **'Inverted Dropout'**. 
+Till now we have applied dropout as per the [dropout paper](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf). However, most of the libraries, like PyTorch, implements **'Inverted Dropout'**. 
 
-In invereted dropout the scaling is applied during training. Inverted dropout randomly retains some activations with probability $$p$$ similar to traditional dropout. Then scaling is done by multiplying the output of retained units $$1/p$$.
-Since, scaling is done during training, no changes are required during evaluation.
+In invereted dropout, the scaling is applied during training. Inverted dropout randomly retains some activations with probability $$p$$ similar to traditional dropout. Then scaling is done by multiplying the output of retained units $$1/p$$.
+Since scaling is done during training, no changes are required during evaluation.
 
 Let's apply scaling during training to implement inverted dropout.
 
@@ -640,8 +640,8 @@ We will implement dropout in our *NeuralNetwork* class.
 
 There are 2 key points we need to note in the code below:
 
-*   **self.training**: While in training mode, PyTorch sets self.training to *True* and in evaluation mode it is set as false. Since the behaviour of dropout is different for training and inference, model.train() and model.eval() should be used to get the correct results.
-*   Till now we have considered $$p$$ as the keep probability and $$1-p$$ as the probability of dropout. In our code we will consider $$p$$ as the probability of dropout and $$1-p$$ as the probability of survival and change the scaling formula accordingly.
+*   **self.training**: While in training mode, PyTorch sets self.training to *True* and in evaluation mode, it is set as false. Since the behaviour of dropout is different for training and inference, model.train() and model.eval() should be used to get the correct results.
+*   Till now we have considered $$p$$ as the keep probability and $$1-p$$ as the probability of dropout. In our code, we will consider $$p$$ as the probability of dropout and $$1-p$$ as the probability of survival and change the scaling formula accordingly.
 
 
 
@@ -738,7 +738,7 @@ Training(Model, Train_DataLoader, Validation_DataLoader, learning_rate = 0.01, e
 
 Compare the current results with the previous results for the same experiment. By applying dropout, we improved validation loss from 0.98 to 0.90. The gap between MSE for train and validation is also reduced.
 
-Dropout significantly reduced overfitting for **Experiment 1** and improved generalization resulting in better performance on validation set.
+Dropout significantly reduced overfitting for **Experiment 1** and improved generalization resulting in better performance on the validation set.
 
 ## Experiment 2 - Revisited With Dropout
 
@@ -769,7 +769,7 @@ Train_DataLoader = DataLoader(Train_Dataset, batch_size=batch_size, shuffle=True
 Validation_DataLoader = DataLoader(Validation_Dataset, batch_size=batch_size*5)
 ```
 
-PyTorch's torch.nn.Module provides a dropout class that can be used directly. It automatically handles mask creation and scaling. The probability argument in **torch.nn.Dropout** is the probability of units being dropped out.
+PyTorch's **torch.nn.Module** provides a dropout class that can be used directly. It automatically handles mask creation and scaling. The probability argument in **torch.nn.Dropout** is the probability of units being dropped out.
 
 
 ```python
@@ -849,13 +849,13 @@ Training(Model, Train_DataLoader, Validation_DataLoader, learning_rate = 0.01, e
     Wall time: 1min 1s
     
 
-Again we see significant reduction in overfitting and improved performance on validation set - MSE dropped from 0.93 to 0.85. Dropout can also be combined with other forms of regularization to get further improvement.
+Again we see a significant reduction in overfitting and improved performance on validation set - MSE dropped from 0.93 to 0.85. Dropout can also be combined with other forms of regularization to get further improvement.
 
 ## Salient Features
 
-Training a neural network with dropout can be seen as training multiple networks where the weights are shared between them. Since the architecture of the model changes with every mini-batch, every unit learns to perform well regardless of which other hidden units are present in the model. This makes the units robust independently that is good in many settings and therby preventing co-adaptation. **This results in better performance and improved generalization error compared to the performance obtained by ensembles of independent models**. You can get more details from this [paper](https://arxiv.org/pdf/1312.6197.pdf).
+Training a neural network with dropout can be seen as training multiple networks where the weights are shared between them. Since the architecture of the model changes with every mini-batch, every unit learns to perform well regardless of which other hidden units are present in the model. This makes the units robust independently that is good in many settings and thereby preventing co-adaptation. **This results in better performance and improved generalization error compared to the performance obtained by ensembles of independent models**. You can get more details from this [paper](https://arxiv.org/pdf/1312.6197.pdf).
 
-Dropout can also be seen as a way of adding noise to the states of hidden units.  As dropout causes destruction of the some information from input, units are forced to learn other features and make use of all the knowledge about the input.
+Dropout can also be seen as a way of adding noise to the states of hidden units.  As dropout causes destruction of some information from input, units are forced to learn other features and make use of all the knowledge about the input.
 
 Dropout can also be modified by multiplying the activations with random variables drawn from other distributions.
 
@@ -868,10 +868,10 @@ We need to exercise some caution when implementing dropout in neural networks.
 
 *   A neural network with dropout usually needs to be trained longer as the parameter updates are very noisy.
 
-*   A larger neural network is required when applying dropout. Dropout is a regularization technique and reduces the expressiveness of neural networks. The combination of larger network with dropout typically results in lower validation error.
+*   A larger neural network is required when applying dropout. Dropout is a regularization technique and reduces the expressiveness of neural networks. The combination of a larger network with dropout typically results in lower validation error.
 
 # **Summary**
 
-Dropout is computationally inexpensive but powerful technique for improving neural networks by reducing overfitting. Dropout trains an ensemble of multiple thinned subnetworks that can be formed by removing hidden or input units from a base network. This prevents networks from building brittle co-adaptations do not generalize well.
+Dropout is a computationally inexpensive but powerful technique for improving neural networks by reducing overfitting. Dropout trains an ensemble of multiple thinned subnetworks that can be formed by removing hidden or input units from a base network. This prevents networks from building brittle co-adaptations that do not generalize well.
 
-In this tutorial we explored dropout in detail and implemented it from scratch. We can now leverage this remarkably effective technique to improve the performance of neural nets in a wide variety of application.
+In this tutorial, we explored dropout in detail and implemented it from scratch. We can now leverage this remarkably effective technique to improve the performance of neural nets in a wide variety of applications.
