@@ -273,7 +273,7 @@ Even in the absence of any statistical noise our model can overfit. As the dimen
 
 
 There are various ways to address this problem of overfitting. We can reduce the input dimension or increase training data or use weight penalties of various
-kinds such as $L1$ and $L2$ regularization. In this post we will be looking at one of the key techniques for reducing overfitting in neural networks - **Dropout**.
+kinds such as $$L1$$ and $$L2$$ regularization. In this post we will be looking at one of the key techniques for reducing overfitting in neural networks - **Dropout**.
 
 # **Dropout**
 
@@ -289,7 +289,7 @@ Dropout is a technique that provides a way of combining many different neural ne
 
 Dropout means randomly switching off some hidden units in a neural network while training. During a mini-batch units are randomly removed from the network, along with all its incoming and outgoing connections resulting in a thinned network. Each unit is retained with a fixed probability $$p$$ independent of other units. This means that the probability of a unit being dropped in a mini-batch will be $$1-p$$. 
 
-Since neural networks are a series of aﬃne transformations and non-linearities, an unit can be dropped by multiplying its output value by zero. Thus, dropout can be implemented by multiplying outputs of activations by Bernoulli distributed random variables which take the value 1 with probability $$p$$ and 0 otherwise. $p$ is a hyperparameter ﬁxed before training.
+Since neural networks are a series of aﬃne transformations and non-linearities, an unit can be dropped by multiplying its output value by zero. Thus, dropout can be implemented by multiplying outputs of activations by Bernoulli distributed random variables which take the value 1 with probability $$p$$ and 0 otherwise. $$p$$ is a hyperparameter ﬁxed before training.
 
 Commonly $$p=0.5$$ is used for hidden units and $$p=0.8$$ for input units.
 
@@ -301,7 +301,7 @@ Let's look at an example of a neural network with 2 hidden layers *Fig. 1*.
 
 Let's apply dropout to its hidden layers with $$p=0.6$$. $$p$$ is the 'keep probability'. This makes the probability of a hidden unit being dropped equal $$1-p=0.4$$. Thus with every forward pass 40% of units will be switched off randomly. This will vary with every mini-batch in every epoch: *Fig. 2* and *Fig. 3*. 
 
-$$2^{n}$$ thinned neural networks can be generated from a neural network with $n$ units. So training a neural network with dropout can be seen as training a exponentially large number of neural networks from the collection of $$2^{n}$$ thinned networks where the weights are shared between them.
+$$2^{n}$$ thinned neural networks can be generated from a neural network with $$n$$ units. So training a neural network with dropout can be seen as training a exponentially large number of neural networks from the collection of $$2^{n}$$ thinned networks where the weights are shared between them.
 
 *Fig. 2* and *Fig. 3* illustrates how this network might look like during forward propagation.
 
@@ -347,7 +347,7 @@ W3 = torch.rand(5, 1)
 B3 = torch.rand(1)
 ```
 
-Let's assume the activation function is $ReLU$ for our network. If we don't apply dropout, we will have a normal forward pass for this mini-batch.
+Let's assume the activation function is $$ReLU$$ for our network. If we don't apply dropout, we will have a normal forward pass for this mini-batch.
 
 
 ```python
@@ -493,7 +493,7 @@ Note that since the geometric mean of multiple predictions might not be a probab
 
 <br> $$where$$
 <br> $$\mu$$ represents the mask vector
-<br> $$p(\mu)$$ is the probability distribution used to sample $\mu$ during training
+<br> $$p(\mu)$$ is the probability distribution used to sample $$\mu$$ during training
 <br> $$p(y|x, \mu)$$ prediction of thinned network
 <br> $$d$$ is the number of units that may be dropped
 
