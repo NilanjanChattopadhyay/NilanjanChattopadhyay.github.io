@@ -1,4 +1,8 @@
-# **Introduction**
+---
+layout: post
+title: "Regularization from Scratch - Dropout"
+categories: Basics
+---
 
 The goal of this tutorial is to explore dropout in detail.
 
@@ -38,7 +42,7 @@ torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 ```
 
-Here we are creating a *Input* data with 100 dimensions and 10,000 data points randomly generated from $ U(-1, 1] $. Let's denote the dimensions of the *Input* vectors as $ x_{0}, x_{1}, \dots x_{99} $.
+Here we are creating a *Input* data with 100 dimensions and 10,000 data points randomly generated from $$ U(-1, 1] $$. Let's denote the dimensions of the *Input* vectors as $$ x_{0}, x_{1}, \dots x_{99} $$.
 
 
 ```python
@@ -49,8 +53,8 @@ Input = 2*torch.rand(10000, 100)-1
 
 We will create a *Target* vector from the input using the following relation:
 
-$$ Target = f(x_{0}, x_{1}, \dots x_{99}) = x_{0}^{0} - x_{1} + x_{2}^{2} - x_{3} \dots  x_{46}^{46} - x_{47} + x_{48}^{48} - x_{49} + \epsilon $$
-$$ \text{where } \epsilon \text{ is random noise} $$
+\\[ Target = f(x_{0}, x_{1}, \dots x_{99}) = x_{0}^{0} - x_{1} + x_{2}^{2} - x_{3} \dots  x_{46}^{46} - x_{47} + x_{48}^{48} - x_{49} + \epsilon \\]
+\\[ \text{where } \epsilon \text{ is random noise} \\]
 
 There is no reason for choosing this particular relation between *Input* and *Target*. We are trying to create a high-dimensional regression problem with non-linear relationship between the *Input* and *Target* vectors. Though the *Input* has 100 dimensions/variables, note that the relation is dependent on only 50 variables. In practice we will always have extra variables and noise in our data.
 
@@ -198,7 +202,7 @@ Let's breakdown the output into 2 key points -
 
 This is a clear case of overfitting.
 
-Our network overfitted on a data where the validation data is coming from the exact same distribution. One reason for overfitting could be that our model learnt relations that were not present using the variables that were not part of the relationship: $ x_{50}, x_{51}, \dots x_{99} $. Another reason could be that our model tried to learn the random noise present in our data.
+Our network overfitted on a data where the validation data is coming from the exact same distribution. One reason for overfitting could be that our model learnt relations that were not present using the variables that were not part of the relationship: $$ x_{50}, x_{51}, \dots x_{99} $$. Another reason could be that our model tried to learn the random noise present in our data.
 
 ## Experiment 2 - High Dimensional Data without Extra Variables or Random Noise
 
@@ -206,7 +210,7 @@ What if the we didn't have any noise in the data? And no extra variables? In pra
 
 Let's recreate the target variable using the following:
 
-$$ Target = f(x_{0}, x_{1}, \dots x_{99}) = x_{0}^{0} - x_{1} + x_{2}^{2} - x_{3} \dots  x_{96}^{96} - x_{97} + x_{98}^{98} - x_{99} $$
+\\[ Target = f(x_{0}, x_{1}, \dots x_{99}) = x_{0}^{0} - x_{1} + x_{2}^{2} - x_{3} \dots  x_{96}^{96} - x_{97} + x_{98}^{98} - x_{99} \\]
 
 
 ```python
@@ -283,11 +287,11 @@ Dropout is a technique that provides a way of combining many different neural ne
 
 ## Dropout during Training
 
-Dropout means randomly switching off some hidden units in a neural network while training. During a mini-batch units are randomly removed from the network, along with all its incoming and outgoing connections resulting in a thinned network. Each unit is retained with a fixed probability $p$ independent of other units. This means that the probability of a unit being dropped in a mini-batch will be $1-p$. 
+Dropout means randomly switching off some hidden units in a neural network while training. During a mini-batch units are randomly removed from the network, along with all its incoming and outgoing connections resulting in a thinned network. Each unit is retained with a fixed probability $$p$$ independent of other units. This means that the probability of a unit being dropped in a mini-batch will be $$1-p$$. 
 
-Since neural networks are a series of aﬃne transformations and non-linearities, an unit can be dropped by multiplying its output value by zero. Thus, dropout can be implemented by multiplying outputs of activations by Bernoulli distributed random variables which take the value 1 with probability $p$ and 0 otherwise. $p$ is a hyperparameter ﬁxed before training.
+Since neural networks are a series of aﬃne transformations and non-linearities, an unit can be dropped by multiplying its output value by zero. Thus, dropout can be implemented by multiplying outputs of activations by Bernoulli distributed random variables which take the value 1 with probability $$p$$ and 0 otherwise. $p$ is a hyperparameter ﬁxed before training.
 
-Commonly $p=0.5$ is used for hidden units and $p=0.8$ for input units.
+Commonly $$p=0.5$$ is used for hidden units and $$p=0.8$$ for input units.
 
 Let's look at an example of a neural network with 2 hidden layers *Fig. 1*. 
 
@@ -295,9 +299,9 @@ Let's look at an example of a neural network with 2 hidden layers *Fig. 1*.
 
 *Fig. 1: Neural Network with 2 input units and 5 hidden units in 2 hidden layers*
 
-Let's apply dropout to its hidden layers with $p=0.6$. $p$ is the 'keep probability'. This makes the probability of a hidden unit being dropped equal $1-p=0.4$. Thus with every forward pass 40% of units will be switched off randomly. This will vary with every mini-batch in every epoch: *Fig. 2* and *Fig. 3*. 
+Let's apply dropout to its hidden layers with $$p=0.6$$. $$p$$ is the 'keep probability'. This makes the probability of a hidden unit being dropped equal $$1-p=0.4$$. Thus with every forward pass 40% of units will be switched off randomly. This will vary with every mini-batch in every epoch: *Fig. 2* and *Fig. 3*. 
 
-$2^{n}$ thinned neural networks can be generated from a neural network with $n$ units. So training a neural network with dropout can be seen as training a exponentially large number of neural networks from the collection of $2^{n}$ thinned networks where the weights are shared between them.
+$$2^{n}$$ thinned neural networks can be generated from a neural network with $n$ units. So training a neural network with dropout can be seen as training a exponentially large number of neural networks from the collection of $$2^{n}$$ thinned networks where the weights are shared between them.
 
 *Fig. 2* and *Fig. 3* illustrates how this network might look like during forward propagation.
 
@@ -311,7 +315,7 @@ Different subnetworks will be generated with every forward pass. The dropped uni
 
 *Fig. 3: Neural Network with 40% hidden units dropped*
 
-Since this network has 10 hidden units, $2^{10}$ different thinned networks are possible.
+Since this network has 10 hidden units, $$2^{10}$$ different thinned networks are possible.
 
 
 ## Dropout in Practice
@@ -363,7 +367,7 @@ H2.clamp_(0)
 Out = H2@W3 + B3
 ```
 
-To apply dropout we will create a binary vector, commonly called as binary mask, where $1$'s will represent the units to keep and $0$'s will represnt the units to drop.
+To apply dropout we will create a binary vector, commonly called as binary mask, where $$1$$'s will represent the units to keep and $$0$$'s will represnt the units to drop.
 
 
 ```python
@@ -482,18 +486,18 @@ Another good approximation can be achieved by taking geometric mean of the predi
 Note that since the geometric mean of multiple predictions might not be a probability distribution. Therefore, a condition is placed that none of the submodels can assign a probability of 0 to any event. Also, the resulting distribution is normalized.
 
 > **Arithmetic Mean**
-$$ p_{ensemble} = \sum_{\mu}^{}p(\mu)p(y|x, \mu) $$
+\\[ p_{ensemble} = \sum_{\mu}^{}p(\mu)p(y|x, \mu) \\]
 
 > **Geometric Mean**
-$$ p_{ensemble} = \bigg(\prod_{\mu}^{}p(\mu)p(y|x, \mu)\bigg)^{\frac{1}{2^{d}}} $$
+\\[ p_{ensemble} = \bigg(\prod_{\mu}^{}p(\mu)p(y|x, \mu)\bigg)^{\frac{1}{2^{d}}} \\]
 
-<br> $where$
-<br> $\mu$ represents the mask vector
-<br> $p(\mu)$ is the probability distribution used to sample $\mu$ during training
-<br> $p(y|x, \mu)$ prediction of thinned network
-<br> $d$ is the number of units that may be dropped
+<br> $$where$$
+<br> $$\mu$$ represents the mask vector
+<br> $$p(\mu)$$ is the probability distribution used to sample $\mu$ during training
+<br> $$p(y|x, \mu)$$ prediction of thinned network
+<br> $$d$$ is the number of units that may be dropped
 
-Inference for dropout is achived by approximating the geometric mean. If $p$ is the probability of a unit being retained during training, then the outgoing weights of that unit are multiplied by $p$ at test time. The idea is to keep the expected output value from the unit same during training and test time. This approximates the geometric mean of predictions  of the entire ensemble. Empirically training a network with dropout and using approximate averaging method at test time improves generalization and reduces overfitting and can work as well as Monte-Carlo Model Averaging.
+Inference for dropout is achived by approximating the geometric mean. If $$p$$ is the probability of a unit being retained during training, then the outgoing weights of that unit are multiplied by $$p$$ at test time. The idea is to keep the expected output value from the unit same during training and test time. This approximates the geometric mean of predictions  of the entire ensemble. Empirically training a network with dropout and using approximate averaging method at test time improves generalization and reduces overfitting and can work as well as Monte-Carlo Model Averaging.
 
 Let's implement the inference part of dropout along with the training part.
 
@@ -547,7 +551,7 @@ Out = H2@W3 + B3
 
 Till now we have applied dropout as per the [dropout paper](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf). However, most of the libaries, like PyTorch, implements **'Inverted Dropout'**. 
 
-In invereted dropout the scaling is applied during training. Inverted dropout randomly retains some activations with probability $p$ similar to traditional dropout. Then scaling is done by multiplying the output of retained units $1/p$.
+In invereted dropout the scaling is applied during training. Inverted dropout randomly retains some activations with probability $$p$$ similar to traditional dropout. Then scaling is done by multiplying the output of retained units $$1/p$$.
 Since, scaling is done during training, no changes are required during evaluation.
 
 Let's apply scaling during training to implement inverted dropout.
@@ -637,7 +641,7 @@ We will implement dropout in our *NeuralNetwork* class.
 There are 2 key points we need to note in the code below:
 
 *   **self.training**: While in training mode, PyTorch sets self.training to *True* and in evaluation mode it is set as false. Since the behaviour of dropout is different for training and inference, model.train() and model.eval() should be used to get the correct results.
-*   Till now we have considered $p$ as the keep probability and $1-p$ as the probability of dropout. In our code we will consider $p$ as the probability of dropout and $1-p$ as the probability of survival and change the scaling formula accordingly.
+*   Till now we have considered $$p$$ as the keep probability and $$1-p$$ as the probability of dropout. In our code we will consider $$p$$ as the probability of dropout and $$1-p$$ as the probability of survival and change the scaling formula accordingly.
 
 
 
