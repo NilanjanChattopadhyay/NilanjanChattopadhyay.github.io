@@ -411,7 +411,7 @@ H1
 
 
 
-To apply the dropout mask, we do an element-wise product. We can look at the result and confirm that unit 2, unit 4 and unit 5 have been turned off.
+To apply the dropout mask, we do an element-wise product. We can look at the result and confirm that unit 2 and unit 4 have been turned off.
 
 
 ```python
@@ -814,7 +814,7 @@ def Training(Model, Train_DataLoader, Validation_DataLoader, learning_rate = 0.0
 %%time
 
 # Instantiate Model    
-Model = NeuralNetwork(Input_Size=100, Dropout=0.4)
+Model = NeuralNetwork(Input_Size=100, Dropout=0.5)
 
 # Train the Model
 Training(Model, Train_DataLoader, Validation_DataLoader, learning_rate = 0.01, epochs = 1000)
