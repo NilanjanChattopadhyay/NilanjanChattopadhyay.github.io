@@ -29,7 +29,7 @@ A neuron receives one or more inputs, adds them up and passes the sum through a 
 
 ### **Simplest Neural Network - A Neuron**
 
-<img src="https://github.com/NilanjanChattopadhyay/NilanjanChattopadhyay.github.io/blob/master/images/NeuralNet-1.png?raw=true" width="557" height="400" alt="Neural Network with 1 Neuron" title="Neural Network" align="center"/>
+<img src="https://raw.githubusercontent.com/NilanjanChattopadhyay/NilanjanChattopadhyay.github.io/master/images/NeuralNet-1.png" width="557" height="400" alt="Neural Network with 1 Neuron" title="Neural Network" align="center"/>
 
 <br>  Let's look at the above diagram - Neural Network with a single layer. This network receives 3 inputs from the Input Layer. Each input is then multiplied with a weight, $$w_{i}$$,  before going into the next layer. The weights are represented by arrows and are also called parameters. This network has only 1 Neuron in its layer. First, the neuron adds up the 3 weighted inputs it received. Then it passes the sum through a non-linear function, $$f$$, and outputs a number. The output is represented by $$y$$ in this diagram. 
 
@@ -63,7 +63,7 @@ We will explore the benefits of these properties later.
 
 ### **Neural Network with multiple neurons**
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Colored_neural_network.svg" width="296" height="356" title="Neural Network" align="center"/>
+<img src="https://raw.githubusercontent.com/NilanjanChattopadhyay/NilanjanChattopadhyay.github.io/master/images/NeuralNet-2.png" width="533" height="400" title="Neural Network" align="center"/>
 
 In practice we will almost always use neural networks with more than 1 unit. The above image is an example of a neural net with 1 hidden layer. Each hidden unit receives 3 inputs modified by a weight. The weights are different for each unit and thus, there are 12 weights/parameters/arrows between the input layer and hidden layer. Each hidden unit sums the weighted inputs and passes the sum through an activation function to produce an output. The output of the hidden layer becomes input for the next layer.
 
@@ -1521,7 +1521,7 @@ for epoch in range(epoch):
     Model.eval()
     with torch.no_grad():
       Validation_Loss = sum(Loss_Function(Model(X), Y) for X, Y in Validation_DataLoader)
-      Validation_Loss = Validation_Loss/len(Validation_Data)
+      Validation_Loss = Validation_Loss/len(Validation_DataLoader)
     print('Epoch: {}. Train Loss: {}. Validation Loss: {}'.format(epoch, Loss, Validation_Loss))
 
 # Calulate Validation Loss
